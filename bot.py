@@ -17,7 +17,7 @@ from handlers.admin.product import router as admin_product
 
 
 async def main():
-    bot=Bot(token='8769743315:AAFmjssEBaD1_7HLuyB107teoydZ8xUzesI')
+    bot=Bot(token='8420342781:AAEFA6WMM0b7EYPbveIQtsDHUvlpXiI-cSo')
     storage = MemoryStorage()
     dp=Dispatcher(storage=storage)
     

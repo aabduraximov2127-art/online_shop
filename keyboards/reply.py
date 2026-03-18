@@ -21,7 +21,7 @@ def menyu():
 def admin_menyu():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="📦 Mahsulotlar"),KeyboardButton(text='Mening Buyurtmalarim')],
+            [KeyboardButton(text="Mahsulotlar"),KeyboardButton(text='Mening Buyurtmalarim')],
             [KeyboardButton(text='Profile'),KeyboardButton(text='Admin panel')]
         ],
         resize_keyboard=True

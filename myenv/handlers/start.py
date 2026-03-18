@@ -20,6 +20,6 @@ async def start_handler(msg: Message,db):
         await msg.answer(f'Assalomu Aleykum {msg.from_user.full_name}, Botimizga yozganingizdan xursandmiz!\nSiz avval royxatdan otgansiz ',reply_markup=menyu())
     else:
         await msg.answer('Assalomu Alekom botga yozganingizdan xursandmiz\nBotimizni qoiadalariga amal qilgan xolda royhatan otishingizni sorayaman: ')
-        await msg.answer('Bizning Botimiz toliq siz uchun ishalishi uchun REGISTRATsiyadan otin',reply_markup=register())
+        await msg.answer('Bot toliq ishlashi uchun Registratsiyadan o\'ting',reply_markup=register())
         
         

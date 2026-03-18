@@ -5,7 +5,7 @@ from keyboards.inline import inline_product
 router=Router()
 
 
-@router.message(F.text == "📦 Mahsulotlar")
+@router.message(F.text == "Mahsulotlar")
 async def prod(msg: Message, db):
     products = await db.get_products()
 
