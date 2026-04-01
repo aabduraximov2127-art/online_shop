@@ -42,19 +42,47 @@ def product_action(product_id):
             [InlineKeyboardButton(text="Edit",callback_data=f"edit_product_{product_id}"),InlineKeyboardButton(text="Delete",callback_data=f"delete_product_{product_id}")]
         ]
     )
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 def savat_inline(products):
-    keyboard=[]
+    keyboard = []
 
     for product in products:
         keyboard.append([
-    InlineKeyboardButton(
-        text=f"{product['name']} ({product['price']} so'm)",
-        callback_data="1"
-    ),
-    InlineKeyboardButton(
-        text="❌",
-        callback_data=f"remove_product_{product['id']}"
-    )
-])
+            InlineKeyboardButton(
+                text=f"{product['name']} ({product['price']} so'm)",
+                callback_data="1"
+            ),
+            InlineKeyboardButton(
+                text="❌",
+                callback_data=f"remove_product_{product['id']}"
+            )
+        ])
     
+    keyboard.append([
+        InlineKeyboardButton(
+            text="Buyurtma berish",
+            callback_data="order"
+        )
+    ])
+
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
+
+
+def payment_keyboard():
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                text="Kartadan Tolov 💳",
+                callback_data="karta"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Naqd Tolov 💵",
+                callback_data="naxt"
+            )
+        ]
+    ]
+
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
