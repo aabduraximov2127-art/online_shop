@@ -38,8 +38,5 @@ async def user(call:CallbackQuery,db):
     await call.message.answer('ROEL ozgardi ADMIN')
     await call.answer()
     
-@router.message(F(text="Orqaga"))
-async def orqa(msg: Message):
-    await msg.answer("Orqaga qaytildi", reply_markup=admin_menyu)
-    
+
     

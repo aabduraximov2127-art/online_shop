@@ -13,7 +13,7 @@ def menyu():
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="Mahsulotlar"),KeyboardButton(text='Mening Buyurtmalarim')],
-            [KeyboardButton(text='Profile')]
+            [KeyboardButton(text='Profile'),KeyboardButton(text='Savatcha')]
         ],
         resize_keyboard=True
     )
