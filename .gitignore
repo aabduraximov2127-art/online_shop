@@ -1,18 +1,37 @@
-# Created by https://www.toptal.com/developers/gitignore/api/venv
-# Edit at https://www.toptal.com/developers/gitignore?templates=venv
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+.myenv/
 
-### venv ###
-# Virtualenv
-# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
-.Python
-[Bb]in
-[Ii]nclude
-[Ll]ib
-[Ll]ib64
-[Ll]ocal
-[Ss]cripts
-pyvenv.cfg
-.venv
-pip-selfcheck.json
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
 
-# End of https://www.toptal.com/developers/gitignore/api/venv
+# Environment variables
+.env
+*.env
+
+# VS Code settings
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Logs
+*.log
+
+# Database files
+*.sqlite3
+*.db
+
+# PyCharm
+.idea/
+
+# Build folders
+build/
+dist/
+*.egg-info/
+.eggs/
