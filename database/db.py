@@ -195,5 +195,72 @@ class Database:
             user_id
         )
 
-        return products, total       
+        return products, total  
     
+    
+
+    async def confirm_order(self, user_id):
+        query = """
+    UPDATE orders 
+    SET order_status = 'completed' 
+    WHERE user_id = $1;
+    """
+        await self.pool.execute(query, user_id)
+
+
+
+    async def get_user_order_history(self, user_id):
+        query = """
+    SELECT
+        o.id AS order_id,
+        p.name,
+        p.price
+    FROM orders o
+    JOIN order_items oi ON oi.order_id = o.id
+    JOIN products p ON oi.product_id = p.id
+    WHERE o.user_id = $1 AND o.order_status = 'completed'
+    ORDER BY o.id DESC
+    """
+
+        rows = await self.pool.fetch(query, user_id)
+
+        if not rows:
+            return {}
+
+        orders = {}
+
+        for row in rows:
+            order_id = row["order_id"]
+
+        if order_id not in orders:
+            orders[order_id] = {
+                "products": [],
+                "total": 0
+            }
+
+        orders[order_id]["products"].append({
+            "name": row["name"],
+            "price": row["price"]
+        })
+
+        orders[order_id]["total"] += row["price"]
+
+        return orders
+    
+    
+    async def clear_cart(self, user_id):
+        query = "DELETE FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE user_id=$1 AND order_status='pending')"
+        await self.pool.execute(query, user_id)
+
+
+    async def confirm_order(self, user_id):
+        query = "UPDATE orders SET order_status='completed' WHERE user_id=$1 AND order_status='pending'"
+        await self.pool.execute(query, user_id)
+        
+        await self.clear_cart(user_id)
+        
+    async def get_users_telegram_id(self):
+        query = "SELECT telegram_id FROM users"
+        rows = await self.pool.fetch(query)
+   
+        return [row['telegram_id'] for row in rows]

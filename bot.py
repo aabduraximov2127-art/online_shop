@@ -34,6 +34,9 @@ async def main():
     dp.include_router(product_router)
     dp.include_router(admin_product)
     dp.include_router(users_products_router)
+    
+
+
 
     await dp.start_polling(bot)
 if __name__=="__main__":

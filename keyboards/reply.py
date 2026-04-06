@@ -32,7 +32,22 @@ def admin_panel():
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="Mahsulotlar qoshish"),KeyboardButton(text='Buyurtmalar')],
+            [KeyboardButton(text='Reklama')],
             [KeyboardButton(text='Users'),KeyboardButton(text='Orqaga')]
         ],
         resize_keyboard=True
     )
+
+def contact():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text='Contact',request_contact=True)]
+        ],resize_keyboard=True
+    )
+    
+def pul_tushti():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text='Tushdi')]
+        ],resize_keyboard=True
+    ) 
