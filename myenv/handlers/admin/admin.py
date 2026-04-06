@@ -46,7 +46,7 @@ async def orqa(msg:Message):
     
 
     
-@router.message(F.text.lower() == "Reklama", RoleFilter("admin"))
+@router.message(F.text.lower() == "reklama", RoleFilter("admin"))
 async def reklama(msg: Message, state: FSMContext):
     await msg.answer("📢 Reklama yuborish uchun rasm, video yoki matn yuboring:")
     await state.set_state(Reklama.waiting_for_ads)

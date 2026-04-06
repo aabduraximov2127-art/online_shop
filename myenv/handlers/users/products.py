@@ -2,7 +2,7 @@ from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from filters.adminfilter import RoleFilter
 from keyboards.inline import savat_inline, payment_keyboard
-from keyboards.reply import pul_tushti
+from keyboards.reply import pul_tushti,menyu
 
 router = Router()
 
@@ -91,7 +91,7 @@ async def make_order(call: CallbackQuery, db):
     )
 
 
-# 💵 Naxt to‘lov
+
 @router.callback_query(F.data.startswith("naxt"))
 async def cash_payment(call: CallbackQuery):
     await call.message.answer("❌ Hozircha naqd to‘lov mavjud emas")
@@ -121,7 +121,7 @@ async def payment_confirm(msg: Message):
     await msg.answer(
         "✅ To‘lovingiz tekshirildi!\n"
         "📦 Buyurtmangiz tez orada yetkaziladi.\n\n"
-        "🙏 Raxmat!"
+        "🙏 Raxmat!",reply_markup=menyu()
     )
     
 @router.message(F.text == 'Mening Buyurtmalarim')
