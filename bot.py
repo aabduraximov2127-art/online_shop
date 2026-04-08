@@ -2,16 +2,17 @@ from aiogram import Bot,Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.context import FSMContext
 from database.db import Database
+from config import config
 import asyncio
 
 
 from handlers.start import router as start_router
 from handlers.register import router as register_router
-from handlers.users.profile import router as profile_router
+from handlers.user.profile import router as profile_router
 from handlers.admin.admin import router as admin_router
 from handlers.products.product import router as product_router
 from handlers.admin.product import router as admin_product
-from handlers.users.products import router as users_products_router
+from handlers.user.products import router as users_products_router
 
 
 
