@@ -211,7 +211,7 @@ class Database:
 
     async def get_user_order_history(self, user_id):
         query = """
-    SELECT
+        SELECT
         o.id AS order_id,
         p.name,
         p.price
@@ -221,7 +221,6 @@ class Database:
     WHERE o.user_id = $1 AND o.order_status = 'completed'
     ORDER BY o.id DESC
     """
-
         rows = await self.pool.fetch(query, user_id)
 
         if not rows:
@@ -232,17 +231,20 @@ class Database:
         for row in rows:
             order_id = row["order_id"]
 
+        # Agar bu order hali dictionaryda yo'q bo'lsa yangi kiritamiz
         if order_id not in orders:
             orders[order_id] = {
                 "products": [],
                 "total": 0
             }
 
+        # Mahsulotni qo'shamiz
         orders[order_id]["products"].append({
             "name": row["name"],
             "price": row["price"]
         })
 
+        # Buyurtma summasini yangilaymiz
         orders[order_id]["total"] += row["price"]
 
         return orders
