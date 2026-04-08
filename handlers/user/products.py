@@ -132,14 +132,24 @@ router = Router()
 
 @router.message(F.text == 'Mening Buyurtmalarim')
 async def history(msg: Message, db):
+
     user_id = await db.get_user_id(msg.from_user.id)
 
-
     products = Products(db)
-    orders_text = await products.get_order_history(user_id)
+    orders = await products.get_order_history(user_id)  
 
 
-    await msg.answer(orders_text)
+    if not orders:
+        await msg.answer("📭 Sizda buyurtmalar yo'q")
+        return
+
+
+    for order_id, data in orders.items():
+        text = f"📦 Buyurtma #{order_id}\n"
+        for p in data['products']:
+            text += f"- {p['name']} ({p['price']} so'm)\n"
+        text += f"\n💰 Jami: {data['total']} so'm"
+        await msg.answer(text)
         
         
 @router.callback_query(F.data=='order')
