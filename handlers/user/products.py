@@ -124,32 +124,8 @@ async def payment_confirm(msg: Message):
         "🙏 Raxmat!",reply_markup=menyu()
     )
     
-from aiogram import Router
-from aiogram.types import Message
-from products import Products
-
-router = Router()
-
-@router.message(F.text == 'Mening Buyurtmalarim')
-async def history(msg: Message, db):
-
-    user_id = await db.get_user_id(msg.from_user.id)
-
-    products = Products(db)
-    orders = await products.get_order_history(user_id)  
 
 
-    if not orders:
-        await msg.answer("📭 Sizda buyurtmalar yo'q")
-        return
-
-
-    for order_id, data in orders.items():
-        text = f"📦 Buyurtma #{order_id}\n"
-        for p in data['products']:
-            text += f"- {p['name']} ({p['price']} so'm)\n"
-        text += f"\n💰 Jami: {data['total']} so'm"
-        await msg.answer(text)
         
         
 @router.callback_query(F.data=='order')
@@ -174,3 +150,25 @@ async def clear_cart_handler(call: CallbackQuery,db):
     
     await call.message.edit_text("🛒 Savatchangiz bo'shatildi", reply_markup=savat_inline([]))
     await call.answer()
+    
+@router.message(F.text == 'Mening Buyurtmalarim')
+async def show_order_history(msg: Message, db):
+
+    user_id = await db.get_user_id(msg.from_user.id)
+
+
+
+    orders = await db.get_user_order_history(user_id)
+
+
+    if not orders:
+        await msg.answer("📭 Sizda buyurtmalar yo'q", reply_markup=menyu())
+        return
+
+ 
+    for order_id, data in orders.items():
+        text = f"📦 Buyurtma #{order_id}\n"
+        for p in data['products']:
+            text += f"• {p['name']} — {p['price']} so'm\n"
+        text += f"\n💰 Jami: {data['total']} so'm"
+        await msg.answer(text, reply_markup=menyu())
